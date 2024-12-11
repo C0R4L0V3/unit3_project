@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-dotenv.config({path: './MERN-backend/.env'});
+dotenv.config(); //attempted to make both back and front end load//npm install @vitejs/plugin-react
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -22,7 +22,7 @@ mongoose.connection.on ('connected', () => {
 });
 
 //middleware
-app.use(cors({ origin: 'http://localhost:5173'}))
+app.use(cors())
 
 app.use(express.json())
 

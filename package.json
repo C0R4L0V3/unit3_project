@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run vite\"",
+    "server": "nodemon MERN-backend/server.js",
+    "vite": "vite --config mern-frontend/vite.config.js"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
+  }
+}

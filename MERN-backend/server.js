@@ -9,7 +9,7 @@ app.use(cors())
 
 // //models
 
-const tbd = require('./models/tbd.js');
+// const tbd = require('./models/tbd.js');
 
 
 //import controllers
@@ -27,7 +27,7 @@ app.use(cors({ origin: 'http://localhost:5173'}))
 app.use(express.json())
 
 //routers
-app.use()
+// app.use()
 
 
 

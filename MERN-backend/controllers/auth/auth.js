@@ -40,9 +40,9 @@ authRouter.post('/signup', async (req, res) => {
             username: user.username
         };
 
-        req.session.save(() => {
-            res.redirect('/') //not sure this will work on the frontend
-        })
+        // req.session.save(() => {
+        //     res.redirect('/') //not sure this will work on the frontend
+        // })
          
     } catch (error) {
         res.status(500).json({error: error.message})
@@ -75,10 +75,10 @@ authRouter.post('/login', async (req, res) => {
         };
 
         //create session for user in cookies
-        req.session.user = {
-            _id: userInDatabase._id,
-            username: userInDatabase.username
-        }
+        // req.session.user = {
+        //     _id: userInDatabase._id,
+        //     username: userInDatabase.username
+        // }
         
         //redirect?
         // res.redirect('/')
@@ -90,11 +90,11 @@ authRouter.post('/login', async (req, res) => {
 
 //======== Account Logout ===============
 
-authRouter.get('/sign-out', (req, res) => {
-    req.session.destroy(() => {
-        // res.redirect('/') // should be handled by front end handler
-    })
-})
+// authRouter.get('/sign-out', (req, res) => {
+//     req.session.destroy(() => {
+//         // res.redirect('/') // should be handled by front end handler
+//     })
+// })
 
 // to add?
 //account settings

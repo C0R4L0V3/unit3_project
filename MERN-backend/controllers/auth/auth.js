@@ -26,24 +26,15 @@ authRouter.post('/signup', async (req, res) => {
         }
         //if user name is not take and passwords match create account
         
-        //hash and salt password on creation
-        const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-        req.body.password = hashedPassword
-
         //creates account
-        const user = await User.create(req.body)
+        const user = await User.create({
+            username: req.body.username,
+            //hash and salt password on creation
+            password: bcrypt.hashSync(req.body.password, 10)
+        });
+
         res.status(201).json(user)
-
-        //stores locally the user Id and name in cookies
-        req.session.user ={
-            _id: user._id,
-            username: user.username
-        };
-
-        // req.session.save(() => {
-        //     res.redirect('/') //not sure this will work on the frontend
-        // })
-         
+        
     } catch (error) {
         res.status(500).json({error: error.message})
     }
@@ -102,3 +93,20 @@ authRouter.post('/login', async (req, res) => {
 
 
 module.exports = authRouter
+
+
+//===========grave yard
+
+   //stores locally the user Id and name in cookies
+        // req.session.user ={
+        //     _id: user._id,
+        //     username: user.username
+        // };
+
+        // req.session.save(() => {
+        //     res.redirect('/') //not sure this will work on the frontend
+        // })
+
+                //hash and salt password on creation
+        // const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+        // req.body.password = hashedPassword

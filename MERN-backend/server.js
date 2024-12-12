@@ -3,17 +3,12 @@ dotenv.config(); //attempted to make both back and front end load//npm install @
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const morgan = require('morgan')
-const session = require('express-session')
-const MongoStore = require('connect-mongo')
-const testJWTRouter = require('./controllers/auth/jwt-test.js')
+
 
 const cors = require('cors')
 app.use(cors())
 
 //custom middleware
-const isSignedIn = require('./middleware/isSignedIn.js');
-const passUserToView = require('./middleware/passUserToView.js')
 const authRouter = require('./controllers/auth/auth.js')
 const userRoutes = require('./routes/userRoutes.js')
 //import controllers    
@@ -31,8 +26,6 @@ const User = require('./models/user.js')
 
 
 //routes
-app.use('/test-jwt', testJWTRouter);
-app.use(passUserToView)
 app.use('/auth', authRouter)
 app.use(express.json());
 app.use("/users", userRoutes); //Mount routes

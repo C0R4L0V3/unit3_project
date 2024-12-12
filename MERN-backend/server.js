@@ -3,17 +3,12 @@ dotenv.config(); //attempted to make both back and front end load//npm install @
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const morgan = require('morgan')
-const session = require('express-session')
-const MongoStore = require('connect-mongo')
-const testJWTRouter = require('./controllers/auth/jwt-test.js')
+
 
 const cors = require('cors')
 app.use(cors())
 
 //custom middleware
-// const isSignedIn = require('./middleware/isSignedIn.js');//Comment me out for testing without user.
-// const passUserToView = require('./middleware/passUserToView.js')//Comment me out for testing without user.
 const authRouter = require('./controllers/auth/auth.js')
 const userRoutes = require('./routes/userRoutes.js')
 //import controllers    
@@ -30,14 +25,12 @@ const User = require('./models/user.js')
 // const tbd = require('./models/tbd.js');
 
 
-//routes
-app.use('/test-jwt', testJWTRouter);
-// app.use(passUserToView) //comment me out for testing without user.
-app.use('/auth', authRouter)
 app.use(express.json());
+//routes
+app.use('/auth', authRouter)
 app.use("/users", userRoutes); //Mount routes
 
-// app.use()
+
 
 app.listen(3000, () => {
   console.log("Listening on PORT 3000");

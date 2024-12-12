@@ -26,8 +26,8 @@ const User = require('./models/user.js')
 
 
 //routes
-app.use('/auth', authRouter)
 app.use(express.json());
+app.use('/auth', authRouter)
 app.use("/users", userRoutes); //Mount routes
 
 // app.use()

@@ -13,16 +13,16 @@ const User = require('../../models/user.js')
 //I dont think we need to read this and the component should be loaded on the front end
 
 //create an account
-authRouter.post('/sign-up', async (req, res) => {
+authRouter.post('/signup', async (req, res) => {
     try {
         //check username availbility
         const userInDatabase = await User.findOne({ username: req.params.username });
         if(userInDatabase){
-            return res.send("Username is already taken");
+            return res.json({ message:'Username is already taken'});
         }
         //compares and validates if passwords math on sign up
         if (req.body.password !== req.body.confirmPass){
-            return res.send('Passwords do not match.')
+            return res.json({message: 'Passwords do not match.'})
         }
         //if user name is not take and passwords match create account
         
@@ -55,13 +55,13 @@ authRouter.post('/sign-up', async (req, res) => {
 
 //Login - post 
 
-authRouter.post('login', async (req, res) => {
+authRouter.post('/login', async (req, res) => {
     try {
         //checks to see if username is in database
-        const userInDatabase = await User.findById({username: req.body.username})
+        const userInDatabase = await User.findOne({username: req.body.username})
         //if user does not exsist
         if(!userInDatabase){
-            return res.send('No user found'); // have as temp for testing, change to Username or Password does not match
+           res.json({message: 'No user found'}); // have as temp for testing, change to Username or Password does not match
         };
 
         //compare passwords
@@ -71,7 +71,7 @@ authRouter.post('login', async (req, res) => {
         );
         //if submitted password does not match account password
         if (!validatePW){
-            return res.send('Incorrect Password'); // have as temp for testing, change to Username or Password does not match
+            res.json({message: 'Incorrect Password'}); // have as temp for testing, change to Username or Password does not match
         };
 
         //create session for user in cookies
@@ -81,10 +81,10 @@ authRouter.post('login', async (req, res) => {
         }
         
         //redirect?
-        res.redirect('/')
+        // res.redirect('/')
 
     } catch (error) {
-        res.status(500).json({error: error.message})
+        res.status(400).json({error: error.message})
     }
 })
 
@@ -92,7 +92,7 @@ authRouter.post('login', async (req, res) => {
 
 authRouter.get('/sign-out', (req, res) => {
     req.session.destroy(() => {
-        res.redirect('/') // should be handled by front end handler
+        // res.redirect('/') // should be handled by front end handler
     })
 })
 

@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
+const testJWTRouter = require('./controllers/auth/jwt-test.js')
 
 const cors = require('cors')
 app.use(cors())
@@ -14,6 +15,7 @@ app.use(cors())
 const isSignedIn = require('./middleware/isSignedIn.js');
 const passUserToView = require('./middleware/passUserToView.js')
 const authRouter = require('./controllers/auth/auth.js')
+const userRoutes = require('./routes/userRoutes.js')
 //import controllers    
 
 mongoose.connect(process.env.MONGODB_URI);
@@ -28,11 +30,13 @@ const User = require('./models/user.js')
 // const tbd = require('./models/tbd.js');
 
 
-
+//routes
+app.use('/test-jwt', testJWTRouter);
+app.use(passUserToView)
+app.use('/auth', authRouter)
 app.use(express.json());
 app.use("/users", userRoutes); //Mount routes
 
-//routers
 // app.use()
 
 app.listen(3000, () => {

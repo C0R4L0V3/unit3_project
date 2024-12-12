@@ -13,3 +13,4 @@ npm i cors
 npm i bcrypt <-- pacakge to encrypt passwords
 npm i express-session <-- installs session cookies
 npm i connect-mongo <-- saves session in MongoDB
+npm i jsonwebtoken

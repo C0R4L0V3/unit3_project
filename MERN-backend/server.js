@@ -16,11 +16,10 @@ const passUserToView = require('./middleware/passUserToView.js')
 const authRouter = require('./controllers/auth/auth.js')
 //import controllers    
 
-
 mongoose.connect(process.env.MONGODB_URI);
 
-mongoose.connection.on ('connected', () => {
-    console.log(`connected to MongoDB ${mongoose.connection.name}.`);   
+mongoose.connection.on("connected", () => {
+  console.log(`connected to MongoDB ${mongoose.connection.name}.`);
 });
 
 //models
@@ -28,17 +27,14 @@ const User = require('./models/user.js')
 
 // const tbd = require('./models/tbd.js');
 
-//middleware
-app.use(cors())
 
-app.use(express.json())
+
+app.use(express.json());
+app.use("/users", userRoutes); //Mount routes
 
 //routers
 // app.use()
 
-
-
-
 app.listen(3000, () => {
-    console.log('Listening on PORT 3000');
-})
+  console.log("Listening on PORT 3000");
+});

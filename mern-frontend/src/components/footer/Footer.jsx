@@ -4,12 +4,12 @@ const Footer = (props) => {
 
     return (
         <footer>
-        <div class="footerContainer">
+        <div className="footerContainer">
 
-        <div class = "copyright">
+        <div className="copyright">
             <p>Copyright &copy; 2024 by Cora Love, Amadou Diallo, Chris Lee</p>
         </div>
-        <div class = "footerCommonLinks">
+        <div className="footerCommonLinks">
         <ul>
             <li><a href="https://www.google.com">Security</a></li>
             <li><a href="https://www.google.com">Privacy Policy</a></li>

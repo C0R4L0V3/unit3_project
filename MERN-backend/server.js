@@ -12,8 +12,8 @@ const cors = require('cors')
 app.use(cors())
 
 //custom middleware
-const isSignedIn = require('./middleware/isSignedIn.js');
-const passUserToView = require('./middleware/passUserToView.js')
+// const isSignedIn = require('./middleware/isSignedIn.js');//Comment me out for testing without user.
+// const passUserToView = require('./middleware/passUserToView.js')//Comment me out for testing without user.
 const authRouter = require('./controllers/auth/auth.js')
 const userRoutes = require('./routes/userRoutes.js')
 //import controllers    
@@ -32,7 +32,7 @@ const User = require('./models/user.js')
 
 //routes
 app.use('/test-jwt', testJWTRouter);
-app.use(passUserToView)
+// app.use(passUserToView) //comment me out for testing without user.
 app.use('/auth', authRouter)
 app.use(express.json());
 app.use("/users", userRoutes); //Mount routes

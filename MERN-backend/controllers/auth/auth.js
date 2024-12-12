@@ -54,7 +54,6 @@ authRouter.post('/login', async (req, res) => {
         if(!userInDatabase){
            res.json({message: 'No user found'}); // have as temp for testing, change to Username or Password does not match
         };
-
         //compare passwords
         const validatePW = bcrypt.compareSync(
             req.body.password,
@@ -64,36 +63,15 @@ authRouter.post('/login', async (req, res) => {
         if (!validatePW){
             res.json({message: 'Incorrect Password'}); // have as temp for testing, change to Username or Password does not match
         };
-
-        //create session for user in cookies
-        // req.session.user = {
-        //     _id: userInDatabase._id,
-        //     username: userInDatabase.username
-        // }
-        
-        //redirect?
-        // res.redirect('/')
+        //test line for Postman
+        res.json({ message: 'login successful', user: userInDatabase})
 
     } catch (error) {
         res.status(400).json({error: error.message})
     }
 })
 
-//======== Account Logout ===============
-
-// authRouter.get('/sign-out', (req, res) => {
-//     req.session.destroy(() => {
-//         // res.redirect('/') // should be handled by front end handler
-//     })
-// })
-
-// to add?
-//account settings
-//account deletion
-
-
 module.exports = authRouter
-
 
 //===========grave yard
 
@@ -110,3 +88,25 @@ module.exports = authRouter
                 //hash and salt password on creation
         // const hashedPassword = bcrypt.hashSync(req.body.password, 10);
         // req.body.password = hashedPassword
+
+
+        //create session for user in cookies
+        // req.session.user = {
+        //     _id: userInDatabase._id,
+        //     username: userInDatabase.username
+        // }
+        
+        //redirect?
+        // res.redirect('/')
+
+//======== Account Logout ===============
+
+// authRouter.get('/sign-out', (req, res) => {
+//     req.session.destroy(() => {
+//         // res.redirect('/') // should be handled by front end handler
+//     })
+// })
+
+// to add?
+//account settings
+//account deletion

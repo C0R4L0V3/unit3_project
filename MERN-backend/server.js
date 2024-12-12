@@ -25,12 +25,12 @@ const User = require('./models/user.js')
 // const tbd = require('./models/tbd.js');
 
 
-//routes
 app.use(express.json());
+//routes
 app.use('/auth', authRouter)
 app.use("/users", userRoutes); //Mount routes
 
-// app.use()
+
 
 app.listen(3000, () => {
   console.log("Listening on PORT 3000");

@@ -1,17 +1,20 @@
-const dotenv = require("dotenv");
-dotenv.config({ path: "./MERN-backend/.env" });
-const express = require("express");
+const dotenv = require('dotenv');
+dotenv.config(); //attempted to make both back and front end load//npm install @vitejs/plugin-react
+const express = require('express');
 const app = express();
-const mongoose = require("mongoose");
-const userRoutes = require("./routes/userRoutes");
-const cors = require("cors");
-app.use(cors());
+const mongoose = require('mongoose');
+const morgan = require('morgan')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')
 
-// //models
+const cors = require('cors')
+app.use(cors())
 
-// const tbd = require('./models/tbd.js');
-
-//import controllers
+//custom middleware
+const isSignedIn = require('./middleware/isSignedIn.js');
+const passUserToView = require('./middleware/passUserToView.js')
+const authRouter = require('./controllers/auth/auth.js')
+//import controllers    
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -19,8 +22,12 @@ mongoose.connection.on("connected", () => {
   console.log(`connected to MongoDB ${mongoose.connection.name}.`);
 });
 
-//middleware
-app.use(cors({ origin: "http://localhost:5173" }));
+//models
+const User = require('./models/user.js')
+
+// const tbd = require('./models/tbd.js');
+
+
 
 app.use(express.json());
 app.use("/users", userRoutes); //Mount routes

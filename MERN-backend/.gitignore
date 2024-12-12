@@ -9,6 +9,7 @@ npm i ejs
 npm i mongoose 
 npm i dotenv
 npm i morgan
+npm i cors
 npm i bcrypt <-- pacakge to encrypt passwords
 npm i express-session <-- installs session cookies
 npm i connect-mongo <-- saves session in MongoDB

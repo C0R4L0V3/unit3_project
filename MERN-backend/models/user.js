@@ -23,8 +23,11 @@ const userSchema = mongoose.Schema({
     });
 
     const User = mongoose.model('User', userSchema);  
+    const Content = mongoose.model('Content', contentSchema)
                                                         
-module.exports = User;
+// module.exports = User;
+module.exports = Content;
+
 
 
  

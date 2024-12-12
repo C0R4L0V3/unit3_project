@@ -23,11 +23,12 @@ const userSchema = mongoose.Schema({
     });
 
     const User = mongoose.model('User', userSchema);  
-    const Content = mongoose.model('Content', contentSchema)
+//const Content = mongoose.model('Content', contentSchema)
                                                         
-// module.exports = User;
-module.exports = Content;
+module.exports = User;
+//module.exports = Content;
 
+//swap the commented out lines with the lines above them to convert to a stand alone content model.
 
 
  

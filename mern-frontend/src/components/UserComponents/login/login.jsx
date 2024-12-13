@@ -1,4 +1,4 @@
-const Login = ({ setUser, formData, setFormData }) => {
+const Login = ({ setUser, formData, setFormData, setPage }) => {
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -17,6 +17,7 @@ const Login = ({ setUser, formData, setFormData }) => {
       const JSONdata = await res.json();
       console.log(JSONdata);
       setUser(JSONdata);
+      setPage('Profile')
     } catch (error) {
       console.error("Error logging in", error);
     }
@@ -32,7 +33,7 @@ const Login = ({ setUser, formData, setFormData }) => {
             type="text"
             name="username"
             id="username"
-            value={form.username}
+            value={formData.username}
             onChange={handleInputChange}
             required
           />
@@ -43,7 +44,7 @@ const Login = ({ setUser, formData, setFormData }) => {
             type="password"
             name="password"
             id="password"
-            value={userInputs.password}
+            value={formData.password}
             onChange={handleInputChange}
             required
           />

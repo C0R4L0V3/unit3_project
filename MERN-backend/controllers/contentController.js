@@ -1,4 +1,6 @@
+const { json } = require("express");
 const User = require("../models/user");
+const { all } = require("../routes/userRoutes");
 //adding content
 const addUserContent = async (req, res) => {
   const { userId } = req.params;
@@ -13,6 +15,26 @@ const addUserContent = async (req, res) => {
   } catch (error) {
     console.log("Error adding content");
   }
+};
+
+//get all content
+const getAllContent = async (req,res) => {
+let displayContent = [] //this had to be a let because otherwise it was not able to be returned as a json
+//MATT PLEASE EXPLAIN
+try{
+const allUsers = await User.find();
+// res.json({users: allUsers}) //this works
+anArray = allUsers.map((user) => {
+  user.content.map((content) => {
+    
+    displayContent.push(content)
+  })
+})
+
+res.json({displayContent})
+} catch (error) {
+  console.log("Error retrieving content");
+}
 };
 
 //get the content
@@ -73,4 +95,5 @@ module.exports = {
   addUserContent,
   updateUserContent,
   deleteUserContent,
+  getAllContent,
 };

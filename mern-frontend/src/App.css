@@ -3,40 +3,54 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: ;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.light {
+ background-color: #eff1f0;/*off white (light mode) background*/
+ color: #232928; /* dark text for contrast */
+ border-color: #dde2e1; /* slightly more toward neutral than bg color */
+ font-family: 'Arial', sans-serif;/*To be adjusted*/
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.light .contrast{
+color: #5e6e6b; /*lighter text color for an area where we want to show contrast*/
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.dark {
+  background-color: #181b1b;/*dark mode background*/
+  color: #d6dcdb; /* light text for contrast */
+  border-color: #3b4543; /* slightly more towards neutral than bg color */
+  font-family: 'Arial', sans-serif;/*To be adjusted*/
 }
 
-.card {
-  padding: 2em;
+.dark .contrast{ 
+  color: #9facaa; /*darker text color for contrast*/
 }
 
-.read-the-docs {
-  color: #888;
+.caution{ /*intended to draw attention and convey caution, something like a delete button*/
+  background-color: #941111;
+  color:#fbfbfb
+}
+
+.primary1{ /*our primary theme, can be used for the header, call to action labels/buttons such as upload content or create account/sign up*/
+   background-color: #0c6656;
+   color: #fbfbfb;
+}
+
+.primary2{ 
+  background-color: #fbfbfb;
+  color: #0c6656;
+}
+
+
+.secondary1{/*For tertiary actions, such as editing a post, or submitting feedback */
+  background-color: #280c66;
+  color: #fbfbfb;
+}
+
+.secondary2{/*background for these will be inherited could be inherited but a darkmode option makes 
+  me think it's better to just set it to white.  Can change later.*/
+  background-color: #fbfbfb;
+  color: #280c66;
 }

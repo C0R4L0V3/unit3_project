@@ -1,8 +1,6 @@
-const Login = ({ userInputs, setUserInputs }) => {
+const Login = ({ setUser, formData, setFormData }) => {
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    const newUserInputs = { ...userInputs, [name]: value };
-    setUserInputs(newUserInputs);
+    setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
   const handleLogin = async (e) => {
@@ -12,13 +10,13 @@ const Login = ({ userInputs, setUserInputs }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: userInputs.username,
-          password: userInputs.password,
+          formData,
         }),
       });
 
       const JSONdata = await res.json();
       console.log(JSONdata);
+      setUser(JSONdata);
     } catch (error) {
       console.error("Error logging in", error);
     }
@@ -34,7 +32,7 @@ const Login = ({ userInputs, setUserInputs }) => {
             type="text"
             name="username"
             id="username"
-            value={userInputs.username}
+            value={form.username}
             onChange={handleInputChange}
             required
           />

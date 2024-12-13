@@ -1,7 +1,6 @@
-const SignUp = ({ userInputs, setUserInputs }) => {
+const SignUp = ({ formData, setFormData }) => {
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserInputs({ ...userInputs, [name]: value });
+    setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
   const handleSignup = async (e) => {
@@ -11,9 +10,7 @@ const SignUp = ({ userInputs, setUserInputs }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: userInputs.username,
-          password: userInputs.password,
-          confirmPassword: userInputs.confirmPassword,
+          formData,
         }),
       });
 
@@ -34,7 +31,7 @@ const SignUp = ({ userInputs, setUserInputs }) => {
             type="text"
             name="username"
             id="username"
-            value={userInputs.username || ""}
+            value={formData.username}
             onChange={handleInputChange}
             required
           />
@@ -45,7 +42,7 @@ const SignUp = ({ userInputs, setUserInputs }) => {
             type="password"
             name="password"
             id="password"
-            value={userInputs.password || ""}
+            value={formData.password}
             onChange={handleInputChange}
             required
           />
@@ -56,7 +53,7 @@ const SignUp = ({ userInputs, setUserInputs }) => {
             type="password"
             name="confirmPassword"
             id="confirmPassword"
-            value={userInputs.confirmPassword || ""}
+            value={formData.confirmPassword}
             onChange={handleInputChange}
             required
           />

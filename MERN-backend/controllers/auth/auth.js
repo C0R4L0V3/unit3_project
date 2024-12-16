@@ -30,7 +30,7 @@ authRouter.post('/signup', async (req, res) => {
         const user = await User.create({
             username: req.body.username,
             //hash and salt password on creation
-            password: bcrypt.hashSync(req.body.password, 10)
+            hashedPassword: bcrypt.hashSync(req.body.password, 10)
         });
 
         res.status(201).json(user)

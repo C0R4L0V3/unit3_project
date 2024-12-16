@@ -29,7 +29,7 @@ const Home = ({content, setContent}) => {
                 content.map((post, index) => (//Map through fetchContent()
                      <li className = "postContainer" key={index}> {/* display posts. */}
                         <h3>Name: {post.name}</h3>
-                        <p>{post.value}</p>
+                        <img src={post.value}/>
                         <p>{post.dateUploaded}</p>
 
                     </li>

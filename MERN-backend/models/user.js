@@ -1,5 +1,6 @@
 
 //User Model
+const { transform } = require("lodash");
 const mongoose = require("mongoose");
 
 
@@ -24,7 +25,14 @@ const userSchema = mongoose.Schema({
 
     const User = mongoose.model('User', userSchema);  
 //const Content = mongoose.model('Content', contentSchema)
-                                                        
+
+userSchema.set( 'toJSON', {
+  transform:(document, returnedObject) => {
+    delete returnedObject.password;
+  }
+});
+
+                                                      
 module.exports = User;
 //module.exports = Content;
 

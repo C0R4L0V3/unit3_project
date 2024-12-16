@@ -9,9 +9,8 @@ const Login = ({ setUser, formData, setFormData, setPage }) => {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          formData,
-        }),
+        //form data was wrapped in another obejct, which is causing an issue i think was ({formData})
+        body: JSON.stringify(formData),
       });
 
       const JSONdata = await res.json();

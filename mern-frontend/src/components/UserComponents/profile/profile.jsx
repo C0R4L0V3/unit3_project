@@ -1,30 +1,33 @@
 import { useEffect } from "react"
 
-const Profile = ({user, userContent, setUserContent}) => {
+const Profile = ({ user }) => {
 
-    useEffect(() => {
-        const fetchUserContent = async () => {
-        try {
-            let res = await fetch(`${import.meta.env.VITE_API_URL}/users/${user._id}/content`);
-            let JSONdata = await res.json()
-            console.log(JSONdata);
-            setUserContent(JSONdata)
+
+    console.log(user);
+    
+//     useEffect(() => {
+//         const fetchUserContent = async () => {
+//         try {
+//             let res = await fetch(`${import.meta.env.VITE_API_URL}/users/${user._id}/content`);
+//             let JSONdata = await res.json()
+//             console.log(JSONdata);
+//             setUserContent(JSONdata)
             
-        } catch (error) {
-            console.error('Error fetching user data');
+//         } catch (error) {
+//             console.error('Error fetching user data');
             
-        }
-    }
-    fetchUserContent()
-},[]);
+//         }
+//     }
+//     fetchUserContent()
+// },[]);
 
     
     return (
         <>
         <h1>User Page!</h1>
         <div className="ContentContainer">
-            {userContent.length? ( //Ternary Wrapper in case user has no content
-            userContent.map((post) => (//Map through user content
+            {!user.content.length ? ( //Ternary Wrapper in case user has no content
+            user.content.map((post) => (//Map through user content
                 <div>
                     <h3>Name: {post.name}</h3>
                         <p>{post.value}</p>

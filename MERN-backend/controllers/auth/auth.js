@@ -20,17 +20,19 @@ authRouter.post('/signup', async (req, res) => {
         if(userInDatabase){
             return res.json({ message:'Username is already taken'});
         }
+        console.log(req.body);
         //compares and validates if passwords math on sign up
         if (req.body.password !== req.body.confirmPass){
+            
             return res.json({message: 'Passwords do not match.'})
         }
         //if user name is not take and passwords match create account
-        
+        //  const hashedPassword = bcrypt.hashSync(req.body.password, 10)
         //creates account
         const user = await User.create({
             username: req.body.username,
             //hash and salt password on creation
-            hashedPassword: bcrypt.hashSync(req.body.password, 10)
+            password: bcrypt.hashSync(req.body.password, 10)
         });
 
         res.status(201).json(user)

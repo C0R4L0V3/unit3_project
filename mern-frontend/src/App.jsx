@@ -30,10 +30,10 @@ const App = () => {
          
       {/* {page === 'Landing' ? <Landing /> : ''} */}
       {page === 'Signup' ? <Signup formData={formData} setFormData={setFormData} setUser={setUser}/> : ''}
-      {page === 'Login' ? <Login  formData={formData} setFormData={setFormData} setUser={setUser} setPage={setPage}/> : ''} 
+      {page === 'Login' ? <Login  user={user} formData={formData} setFormData={setFormData} setUser={setUser} setPage={setPage}/> : ''} 
       {page === 'Home' ? <Home content={content} setContent={setContent}/> : ''}
       {/* {page === 'Upload' ? <Upload content={content} setContent={setContent}/> : ''} */}
-      {page == 'Profile' ? <Profile content={content} setContent={setContent}/> : ''}
+      {page == 'Profile' ? <Profile user={user}/> : ''}
       {/* <Header /> */}
       <Navbar handleNav={handleNav} user={user} />{" "}
       {/* passing handler to set page state // passing user state to determine how the nave bar looks*/}

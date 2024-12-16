@@ -1,7 +1,12 @@
-const Login = ({ setUser, formData, setFormData, setPage }) => {
+import { useState } from "react";
+
+const Login = ({ user, setUser, formData, setFormData, setPage }) => {
+
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
+
+const [err, setErr] = useState('')
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -11,12 +16,26 @@ const Login = ({ setUser, formData, setFormData, setPage }) => {
         headers: { "Content-Type": "application/json" },
         //form data was wrapped in another obejct, which is causing an issue i think was ({formData})
         body: JSON.stringify(formData),
-      });
 
+      });
+      if (res.ok) {
       const JSONdata = await res.json();
-      console.log(JSONdata);
+      // console.log(JSONdata);
       setUser(JSONdata);
+      console.log(user);
+      //the JSONdata is an object, and within that object is the user object hence user.user.content
+      console.log(user.user.content);
+      
+      
       setPage('Profile')
+      } else {
+        const errorData = await res.json();
+        console.error('No Account Found', errorData.message || 'Login Failed, pleaser try again');
+         
+        
+      }
+      
+
     } catch (error) {
       console.error("Error logging in", error);
     }

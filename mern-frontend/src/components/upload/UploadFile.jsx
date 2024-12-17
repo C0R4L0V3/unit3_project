@@ -75,20 +75,28 @@ const Upload = ({ user, setUser, setPage }) => {
         id="name"
         value={file.name} 
         onChange={handleFileChange} />
-        <label>Value</label>
+     <label>Video *Use Embeded Link*</label>
         <input 
         type="text" 
-        name="value"
-        id="value"
-        value={file.value} 
+        name="video"
+        id="video"
+        value={file.video} 
         onChange={handleFileChange} />
-        <label>Catagory</label>
+        <label>Image</label>
         <input 
         type="text" 
-        name="category"
-        id="category"
-        value={file.category} 
+        name="image"
+        id="image"
+        value={file.image} 
         onChange={handleFileChange} />
+        <label>Comment</label>
+        <input 
+        type="text" 
+        name="blog"
+        id="blog"
+        value={file.blog} 
+        onChange={handleFileChange} />
+        <button type="submit">Upload</button>
         <button type="submit">Upload</button>
       </form>
     </div>

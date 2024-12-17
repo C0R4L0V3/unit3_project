@@ -69,25 +69,25 @@ useEffect(() => {
 
                 return (
                     <div key={post._id || idx}>
+                        <h2>{post.title}</h2>
                         <h3>Name: {post.name}</h3>
 
-                            {isImage ? (
-                                <img src={post.value} alt={post.name} />
-                            ) : isVideo ? (
-                                // must use the YouTube embed URL, which is designed for iframes
+                                <img src={post.image} alt={post.name} />
+                           
+                                {/* // must use the YouTube embed URL, which is designed for iframes */}
                                 <iframe
                                     width="560"
                                     height="315"
-                                    src={post.value}
+                                    src={post.video}
                                     title="YouTube video player"
                                     frameBorder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     referrerPolicy="strict-origin-when-cross-origin"
                                     allowFullScreen
                                 ></iframe>
-                            ) : (
-                                <p>{post.value}</p> //fallback value if something isnt a video or image
-                            )}
+                        
+                                <p>{post.blog}</p>
+                          
 
                             <p>{post.dateUploaded}</p>
                             <div>

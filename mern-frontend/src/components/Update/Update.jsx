@@ -2,45 +2,65 @@ import { useState } from 'react'
 import './update.css'
 
 const Update = ({ user, setUser, setPage}) => {
+
+    // const [userConent, setUserContent] = useState(user.user.content || []) 
+    const userId = user.user._id
+    //made for simplifying
+    const userContent = user.user.content
+    
+    // need this so i can keep unchanged 
+    const originalContent = userContent.find((post) => post._id === contentId)
+
+    //set initial form state with exsisting content values
     const [file, setFile] = useState ({
         //model keys
-        name: '',
-        video: '',
-        image: '',
-        category: '',
-        blog: '',
+        title: originalContent?.title || '',
+        name: originalContent?.name || '',
+        video: originalContent?.video || '',
+        image: originalContent?.image || '',
+        blog: originalContent?.blog || '',
     });
     
-    const [userConent, setUserContent] = useState(user.user.content || []) 
-    const userId = user.user._id
-
     const handleFileChange = (e) => {
         setFile({...file, [e.target.id]: e.target.value })
         
     }
 
-    const updateHandler = async (contentId) => {
+    const updateHandler = async (e, contentId) => {
+        e.preventDefault(); //prevent form submission reload
         console.log(`trying to update post ${contentId}`);
         
         try {
+            //makes an object with only fields that are updated
+            const updateContent = {};
+             for (const key in file) {
+                if (file[key] !== originalContent[key]) {
+                    updateContent[key] = file[key]
+                }
+             }
+            
             const res = await fetch(`${import.meta.env.VITE_API_URL}/users/${userId}/content/${contentId}`,
                 {   
                     method: 'PUT',
                     headers: {
                         'Content-type': 'application/json'
-                    }
+                    },
+                    body: JSON.stringify(updateContent),
                 }
-            )
+            );
             if(res.ok) {
                 const result = await res.json();
                 console.log(result.mesage);
-                //update the user state
-                setUserContent((prevContent) =>
-                    //map through previoud state
-                    prevContent.filter((post) =>
-                        //if the post._id matches the content id url, make a copy of the array else add post
-                        post._id === contentId ? [...userConent, ] : post))
+                //update the user content with new changes
+                setUser((prevUser) => {
+                    //map through  user content array
+                    const updatedContent = prevUser.userContent.map((post) =>
+                        //if the contetn id and url id matchs merge into the updated array, else add the unchanged content
+                        post._id === contentId ? {...post, ...updatedContent} : post)
+                })
+                
                 alert('Post Updated')
+                setPage('Profile')
              
             } else {
                 console.log(contentId);
@@ -58,9 +78,16 @@ const Update = ({ user, setUser, setPage}) => {
 
     return (
         <div>
-      <h1>Upload your content</h1>
-      <form onSubmit={updateHandler}>
+      <h1>Edit your Content!</h1>
+      <form onSubmit={(e) => updateHandler(e, contentId)}>
         {/* add more possible field to form and model */}
+        <label>Title</label>
+        <input 
+        type="text" 
+        name="title"
+        id="title"
+        value={file.title} 
+        onChange={handleFileChange} />
         <label>Cryptid Name</label>
         <input 
         type="text" 

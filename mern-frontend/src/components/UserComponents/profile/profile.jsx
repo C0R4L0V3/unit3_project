@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 
-const Profile = ({ user }) => {
+const Profile = ({ user, setPage, setContentId }) => {
+
+    // const [contentId, setContentId] = useState(null)
     //defualt to an empty array
     const [userContent, setUserContent] = useState(user.user.content || [])
     const userId = user.user._id;
@@ -48,18 +50,19 @@ const Profile = ({ user }) => {
         try {
             // delete from api
             let res = await fetch(`${import.meta.env.VITE_API_URL}/users/${userId}/content/${contentId}`,
-                {method: 'DELETE',
+                {
+                method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
                 }
             }
         );
         if (res.ok) {
             const result = await res.json();
             console.log(result.message);
-            //update the user state
+            //update the userConent state
             setUserContent((prevContent) => 
-                prevContent.filter((item) => item._id !== contentId))
+                prevContent.filter((post) => post._id !== contentId))
 
             alert('Content Deleted')
         } else {
@@ -73,6 +76,11 @@ const Profile = ({ user }) => {
         }
     }
 
+    const handleUpdateClick = (id => {
+        setContentId(id) // stores the selceted contentId
+        setPage('Update')
+    })
+
     return (
         <>
         <h1>User Page!</h1>
@@ -81,20 +89,17 @@ const Profile = ({ user }) => {
             {userContent && userContent.length ? ( //Ternary Wrapper in case user has no content *prevents the code from breaking if userContent is undfined
             userContent.map((post, idx) => {//Map through user content
                 //was getting an error on toLowercase doing this for a safety check
-                // const isImage = post.category && post.category.toLowerCase() === 'image';
-                // const isVideo = post.category && post.category.toLowerCase() === 'video'
+                const isImage = post.category && post.category.toLowerCase() === 'image';
+                const isVideo = post.category && post.category.toLowerCase() === 'video'
 
                 return (
-                    <div key={idx}>
-                        <h2>Title: {post.title}</h2>
+                    <div key={post._id || idx}>
+                        <h2>{post.title}</h2>
                         <h3>Name: {post.name}</h3>
-                        
-                        
-                            {post.image!=='' && (<img src={post.image} alt={post.name}/>) }
-                            {/*This is a short-circuit evaluation*/}  
-                            {/* Test above by creating item with video and no img */}
-                            {post.video && (
-                                // must use the YouTube embed URL, which is designed for iframes
+
+                                <img src={post.image} alt={post.name} />
+                           
+                                {/* // must use the YouTube embed URL, which is designed for iframes */}
                                 <iframe
                                     width="560"
                                     height="315"
@@ -105,11 +110,13 @@ const Profile = ({ user }) => {
                                     referrerPolicy="strict-origin-when-cross-origin"
                                     allowFullScreen
                                 ></iframe>
-                            )}
-                            <p>{post.blog}</p>
+                        
+                                <p>{post.blog}</p>
+                          
+
                             <p>{post.dateUploaded}</p>
                             <div>
-                                <button>Edit</button>
+                                <button type="button" onClick={() => handleUpdateClick(post._id)}>Edit</button>
                                 <button type="button" onClick={() => deleteHandler(post._id)}>Delete</button>
                             </div>
                         </div>

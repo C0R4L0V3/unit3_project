@@ -20,8 +20,8 @@ const Update = ({ user, setUser, setPage, contentId }) => {
         //model keys
         title: originalContent?.title || '',
         name: originalContent?.name || '',
-        video: originalContent?.video || '',
-        image: originalContent?.image || '',
+        video: originalContent?.video,
+        image: originalContent?.image,
         blog: originalContent?.blog || '',
     });
     
@@ -103,6 +103,7 @@ const Update = ({ user, setUser, setPage, contentId }) => {
         id="title"
         value={file.title} 
         onChange={handleFileChange} />
+        
         <label>Cryptid Name</label>
         <input 
         type="text" 
@@ -110,6 +111,7 @@ const Update = ({ user, setUser, setPage, contentId }) => {
         id="name"
         value={file.name} 
         onChange={handleFileChange} />
+
         <label>Video *Use Embeded Link*</label>
         <input 
         type="text" 
@@ -117,6 +119,7 @@ const Update = ({ user, setUser, setPage, contentId }) => {
         id="video"
         value={file.video} 
         onChange={handleFileChange} />
+
         <label>Image</label>
         <input 
         type="text" 
@@ -124,6 +127,7 @@ const Update = ({ user, setUser, setPage, contentId }) => {
         id="image"
         value={file.image} 
         onChange={handleFileChange} />
+
         <label>Comment</label>
         <input 
         type="text" 

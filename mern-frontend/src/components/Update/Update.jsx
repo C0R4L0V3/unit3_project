@@ -43,6 +43,8 @@ const Update = ({ user, setUser, setPage, contentId }) => {
                     console.log('file key', file[key] );
                     
                     updateContent[key] = file[key]
+                    console.log(updateContent);
+                    
                 }
              }
             

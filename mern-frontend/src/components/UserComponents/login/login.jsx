@@ -24,7 +24,6 @@ const [err, setErr] = useState('')
       setUser(JSONdata);
       console.log(user);
       //the JSONdata is an object, and within that object is the user object hence user.user.content
-      console.log(user.user.content);
       
       
       setPage('Profile')

@@ -1,12 +1,14 @@
+import "./Navbar.css"
 
 const Navbar = ({ handleNav, user }) => {
 
     //if a user isnot logged in, show one state of 
 
     return (
-        <>
+        <div className="navbar">
         {/* if a user isnot logged in, show one navbar state as */}
               {/* Else if user is logged in, render Navbar state as */}
+            
         {!user ? (
             <div className="navbarblock">
                 <div className="logsignblock">
@@ -29,7 +31,7 @@ const Navbar = ({ handleNav, user }) => {
                 </div>
             </div>
             )}
-        </>
+        </div>
              
     )
 }

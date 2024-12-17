@@ -1,35 +1,58 @@
 import React, { useState } from "react";
 
-function FileUpload() {
-  const [file, setFile] = useState(null);
+const Upload = ({ user, setUser, setPage }) => {
+  const [file, setFile] = useState({
+    name: '',
+    value: '',
+    category: ''
+  });
 
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    setFile({ ...file, [e.target.id]: e.target.value });
   };
 
   
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!file) {
-      alert("Please select a file to upload.");
-      return;
-    }
+    // if (!file) {
+    //   alert("Please select a file to upload.");
+    //   return;
+    // }
 
-    const formData = new FormData();
-    formData.append("file", file); 
+    // const formData = new FormData();
+    // formData.append("file", file); 
+    console.log(user.user._id);
+    
+    const userId = user.user._id
 
     try {
-      const response = await fetch("/upload", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/${user.user._id}/content`, {
         method: "POST",
-        body: formData, 
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(file), 
       });
 
       if (response.ok) {
         const result = await response.json();
         alert("File uploaded successfully!");
         console.log(result);
+
+        //append new upload to the array
+        const updateUserContent = {
+        ...user,
+        user: {
+          ...user.user,  
+          content: [...user.user.content, result]
+          },
+        }; 
+
+        setUser(updateUserContent)
+        setPage('Profile')
+        console.log(user);
+        
+
       } else {
         console.error("Error uploading file:", response.statusText);
         alert("Failed to upload the file.");
@@ -44,22 +67,43 @@ function FileUpload() {
     <div>
       <h1>Upload your content</h1>
       <form onSubmit={handleSubmit}>
-        <input type="file" name="file" onChange={handleFileChange} />
+        {/* add more possible field to form and model */}
+        <label>Cryptid Name</label>
+        <input 
+        type="text" 
+        name="name"
+        id="name"
+        value={file.name} 
+        onChange={handleFileChange} />
+        <label>Value</label>
+        <input 
+        type="text" 
+        name="value"
+        id="value"
+        value={file.value} 
+        onChange={handleFileChange} />
+        <label>Catagory</label>
+        <input 
+        type="text" 
+        name="category"
+        id="category"
+        value={file.category} 
+        onChange={handleFileChange} />
         <button type="submit">Upload</button>
       </form>
     </div>
   );
 }
 
-export default FileUpload;
+export default Upload;
 
-const FileUpload = {};
+// const Upload = {};
 
-const [file, setFile] = useState(FileUpload);
+// const [file, setFile] = useState(FileUpload);
 
-const handleFileChange = () => {
-  const { name, value } = e.target;
-  const fileToUpload = { ...file, [name]: value };
-  setFile(fileToUpload);
-};
-<input type="file" name="file" onChange={handleFileChange} />;
+// const handleFileChange = () => {
+//   const { name, value } = e.target;
+//   const fileToUpload = { ...file, [name]: value };
+//   setFile(fileToUpload);
+// };
+// <input type="file" name="file" onChange={handleFileChange} />;

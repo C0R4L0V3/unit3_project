@@ -7,6 +7,7 @@ import Footer from "./components/footer/Footer.jsx";
 import Login from "./components/UserComponents/login/login.jsx";
 import Signup from "./components/UserComponents/signup/signup.jsx";
 import Profile from "./components/UserComponents/profile/profile.jsx";
+import Upload from "./components/upload/UploadFile.jsx"
 
 const App = () => {
 // function App() {
@@ -16,7 +17,7 @@ const App = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    confirmPassword: "",
+    confirmPass: "",
   });
 
   const handleNav = (page) => {
@@ -28,14 +29,15 @@ const App = () => {
   return (
     <>
          
+      <Navbar handleNav={handleNav} user={user} />
+      <br></br>
       {/* {page === 'Landing' ? <Landing /> : ''} */}
-      {page === 'Signup' ? <Signup formData={formData} setFormData={setFormData} setUser={setUser}/> : ''}
+      {page === 'Signup' ? <Signup formData={formData} setFormData={setFormData} setUser={setUser} setPage={setPage}/> : ''}
       {page === 'Login' ? <Login  user={user} formData={formData} setFormData={setFormData} setUser={setUser} setPage={setPage}/> : ''} 
       {page === 'Home' ? <Home content={content} setContent={setContent}/> : ''}
-      {/* {page === 'Upload' ? <Upload content={content} setContent={setContent}/> : ''} */}
+      {page === 'Upload' ? <Upload user={user} setUser={setUser} setPage={setPage}/> : ''}
       {page == 'Profile' ? <Profile user={user}/> : ''}
       {/* <Header /> */}
-      <Navbar handleNav={handleNav} user={user} />{" "}
       {/* passing handler to set page state // passing user state to determine how the nave bar looks*/}
       <Footer />
     </>

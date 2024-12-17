@@ -3,6 +3,9 @@ import "./Footer.css";
 const Footer = (props) => {
   return (
     <footer>
+      <br></br>
+      <br></br>
+      <br></br>
       <div className="footerContainer">
         <div className="footerCommonLinks">
           <ul>

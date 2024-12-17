@@ -1,3 +1,4 @@
+import "./Home.css"
 import { useEffect } from "react"
 
 const Home = ({content, setContent}) => {

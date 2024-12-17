@@ -1,47 +1,110 @@
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 
 const Profile = ({ user }) => {
+    //defualt to an empty array
+    const [userContent, setUserContent] = useState(user.user.content || [])
+    const userId = user.user._id
+    
+    //add use effect to refresh uplaoded list after upload
+const fetchUserContent = async () => {
+    try {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/users/${userId}/content`);
+        const JSONdata = await res.json()
+    
+        setUserContent(JSONdata.user.content || [])
+        
+    } catch (error) {
+        console.error('Error fetching user data', error);
+        
+    }
+}
 
-    
-    
-    
-        useEffect(() => {
-        console.log(user);
-//         const fetchUserContent = async () => {
-//         try {
-//             let res = await fetch(`${import.meta.env.VITE_API_URL}/users/${user._id}/content`);
-//             let JSONdata = await res.json()
-//             console.log(JSONdata);
-//             setUserContent(JSONdata)
-            
-//         } catch (error) {
-//             console.error('Error fetching user data');
-            
-//         }
-//     }
-//     fetchUserContent()
-},[]);
+useEffect(() => {
+    console.log(user);
+    fetchUserContent()
+},[user]);
 
-    
+    //delete handler
+    const deleteHandler = async (contentId) => {
+
+        try {
+            // delete from api
+            let res = await fetch(`${import.meta.env.VITE_API_URL}/users/${userId}/content/${contentId}`,
+                {method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }
+        );
+        if (res.ok) {
+            const result = await res.json();
+            console.log(result.message);
+            //update the user state
+            setUserContent((prevContent) => 
+                prevContent.filter((item) => item._id !== contentId))
+
+            alert('Content Deleted')
+        } else {
+            alert('Failed to Delete')
+        }
+
+        } catch (error) {
+            console.error('Error deleteting content', error);
+            
+            
+        }
+    }
+
     return (
         <>
         <h1>User Page!</h1>
         <div className="ContentContainer">
-            {!user.user.content.length ? ( //Ternary Wrapper in case user has no content
-            <p>Looks like you haven't uploaded any content.  Click the + button to get started!</p>
-        ) : ( 
-            user.user.content.map((post) => (//Map through user content
-                <div>
-                    <h3>Name: {post.name}</h3>
-                        <p>{post.value}</p>
-                        <p>{post.dateUploaded}</p>
-                </div>
-                ))
+            
+            {userContent && userContent.length ? ( //Ternary Wrapper in case user has no content *prevents the code from breaking if userContent is undfined
+            userContent.map((post, idx) => {//Map through user content
+                //was getting an error on toLowercase doing this for a safety check
+                const isImage = post.category && post.category.toLowerCase() === 'image';
+                const isVideo = post.category && post.category.toLowerCase() === 'video'
+
+                return (
+                    <div key={idx}>
+                        <h3>Name: {post.name}</h3>
+
+                            {isImage ? (
+                                <img src={post.value} alt={post.name} />
+                            ) : isVideo ? (
+                                // must use the YouTube embed URL, which is designed for iframes
+                                <iframe
+                                    width="560"
+                                    height="315"
+                                    src={post.value}
+                                    title="YouTube video player"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerPolicy="strict-origin-when-cross-origin"
+                                    allowFullScreen
+                                ></iframe>
+                            ) : (
+                                <p>{post.value}</p> //fallback value if something isnt a video or image
+                            )}
+
+                            <p>{post.dateUploaded}</p>
+                            <div>
+                                <button>Edit</button>
+                                <button type="button" onClick={() => deleteHandler(post._id)}>Delete</button>
+                            </div>
+                        </div>
+                    );
+                })
+            ) : (
+                <p>
+                    Looks like you haven't uploaded any content.  Click the + button to get started!
+                </p>
             )}
-            </div>
+            </div>     
         </>
-    )
-}
+    );   
+};
 
 
 export default Profile

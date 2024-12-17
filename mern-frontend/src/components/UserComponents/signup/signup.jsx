@@ -1,4 +1,4 @@
-const SignUp = ({ formData, setFormData }) => {
+const SignUp = ({ formData, setFormData, setUser, setPage }) => {
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -11,9 +11,17 @@ const SignUp = ({ formData, setFormData }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
+      if (res.ok){
       const JSONdata = await res.json();
       console.log(JSONdata);
+      setUser(JSONdata)
+      setPage('Profile')
+      }
+      else {
+        console.log('Error response not ok');
+        
+        
+      }
     } catch (error) {
       console.error("Error signing up", error);
     }
@@ -46,12 +54,12 @@ const SignUp = ({ formData, setFormData }) => {
           />
         </p>
         <p>
-          <label htmlFor="confirmPassword">Confirm Password:</label>
+          <label htmlFor="confirmPass">Confirm Password:</label>
           <input
             type="password"
-            name="confirmPassword"
-            id="confirmPassword"
-            value={formData.confirmPassword}
+            name="confirmPass"
+            id="confirmPass"
+            value={formData.confirmPass}
             onChange={handleInputChange}
             required
           />

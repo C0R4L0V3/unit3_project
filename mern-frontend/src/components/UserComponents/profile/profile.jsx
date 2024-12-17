@@ -64,20 +64,17 @@ useEffect(() => {
             {userContent && userContent.length ? ( //Ternary Wrapper in case user has no content *prevents the code from breaking if userContent is undfined
             userContent.map((post, idx) => {//Map through user content
                 //was getting an error on toLowercase doing this for a safety check
-                // const isImage = post.category && post.category.toLowerCase() === 'image';
-                // const isVideo = post.category && post.category.toLowerCase() === 'video'
+                const isImage = post.category && post.category.toLowerCase() === 'image';
+                const isVideo = post.category && post.category.toLowerCase() === 'video'
 
                 return (
-                    <div key={idx}>
-                        <h2>Title: {post.title}</h2>
+                    <div key={post._id || idx}>
+                        <h2>{post.title}</h2>
                         <h3>Name: {post.name}</h3>
-                        
-                        
-                            {post.image!=='' && (<img src={post.image} alt={post.name}/>) }
-                            {/*This is a short-circuit evaluation*/}  
-                            {/* Test above by creating item with video and no img */}
-                            {post.video && (
-                                // must use the YouTube embed URL, which is designed for iframes
+
+                                <img src={post.image} alt={post.name} />
+                           
+                                {/* // must use the YouTube embed URL, which is designed for iframes */}
                                 <iframe
                                     width="560"
                                     height="315"
@@ -88,8 +85,10 @@ useEffect(() => {
                                     referrerPolicy="strict-origin-when-cross-origin"
                                     allowFullScreen
                                 ></iframe>
-                            )}
-                            <p>{post.blog}</p>
+                        
+                                <p>{post.blog}</p>
+                          
+
                             <p>{post.dateUploaded}</p>
                             <div>
                                 <button type="button" onClick={() => setPage('Update')}>Edit</button>

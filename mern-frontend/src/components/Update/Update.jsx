@@ -6,7 +6,7 @@ const Update = ({ user, setUser, setPage}) => {
     // const [userConent, setUserContent] = useState(user.user.content || []) 
     const userId = user.user._id
     //made for simplifying
-    const userContent = user.user.content
+    const content = user.user.content
     
     // need this so i can keep unchanged 
     const originalContent = userContent.find((post) => post._id === contentId)
@@ -54,7 +54,7 @@ const Update = ({ user, setUser, setPage}) => {
                 //update the user content with new changes
                 setUser((prevUser) => {
                     //map through  user content array
-                    const updatedContent = prevUser.userContent.map((post) =>
+                    const updatedContent = prevUser.content.map((post) =>
                         //if the contetn id and url id matchs merge into the updated array, else add the unchanged content
                         post._id === contentId ? {...post, ...updatedContent} : post)
                 })

@@ -3,27 +3,45 @@ import { useState, useEffect } from "react"
 const Profile = ({ user }) => {
     //defualt to an empty array
     const [userContent, setUserContent] = useState(user.user.content || [])
-    const userId = user.user._id
+    const userId = user.user._id;
     
     //add use effect to refresh uplaoded list after upload
-const fetchUserContent = async () => {
-    try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/users/${userId}/content`);
-        const JSONdata = await res.json()
-    
-        setUserContent(JSONdata.user.content || [])
-        
-    } catch (error) {
-        console.error('Error fetching user data', error);
-        
-    }
-}
 
-useEffect(() => {
-    console.log(user);
-    fetchUserContent()
-},[user]);
 
+    useEffect(() => {
+        const fetchUserContent = async () => {
+            try {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/users/${userId}/content`);
+                let JSONdata = await res.json();
+                console.log(JSONdata);
+                setUserContent(JSONdata || [])
+                console.log(userContent);
+                
+                // setUserContent(JSONdata.user.content || [])
+                
+            } catch (error) {
+                console.error('Error fetching user data', error); 
+            }
+        };
+        fetchUserContent()
+    },[])
+  //////////////////////////////////////////////////////////  CODE GRAVEYARD
+// const fetchUserContent = async () => {
+//     try {
+//         const res = await fetch(`${import.meta.env.VITE_API_URL}/users/${userId}/content`);
+//         let JSONdata = await res.json();
+//         setUserContent(JSONdata.user.content || [])
+        
+//     } catch (error) {
+//         console.error('Error fetching user data', error); 
+//     }
+// };
+
+// useEffect(() => {
+//     console.log(user);
+//     fetchUserContent();
+// },[user]);
+////////////////////////////////////////////////////////////
     //delete handler
     const deleteHandler = async (contentId) => {
 

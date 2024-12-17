@@ -6,8 +6,10 @@ const mongoose = require("mongoose");
 
 const contentSchema = new mongoose.Schema({
   name: String,
-  value: String, //essence of the content, image/video link, string of text for a comment etc.
+  video: String, //essence of the content, video link,
+  image: String, //image
   category: String, //e.g. "Comment", "Image", "Video", for now if the user has a lot of uploads I imagine we will parse they by content-type.
+  blog: String, // string of text
   dateUploaded: String, //good chance that MONGODB tracks this metadata on their own.  Added here either way.
   });
 

@@ -103,7 +103,7 @@ const Update = ({ user, setUser, setPage, contentId }) => {
         id="title"
         value={file.title} 
         onChange={handleFileChange} />
-        
+
         <label>Cryptid Name</label>
         <input 
         type="text" 
@@ -111,22 +111,28 @@ const Update = ({ user, setUser, setPage, contentId }) => {
         id="name"
         value={file.name} 
         onChange={handleFileChange} />
-
-        <label>Video *Use Embeded Link*</label>
-        <input 
-        type="text" 
-        name="video"
-        id="video"
-        value={file.video} 
-        onChange={handleFileChange} />
-
-        <label>Image</label>
-        <input 
-        type="text" 
-        name="image"
-        id="image"
-        value={file.image} 
-        onChange={handleFileChange} />
+        {originalContent.video !== undefined && (
+            <div>
+                <label>Video *Use Embeded Link*</label>
+                <input 
+                type="text" 
+                name="video"
+                id="video"
+                value={file.video} 
+                onChange={handleFileChange} />
+            </div>
+        )}
+        {originalContent.image !== undefined && (
+            <div>
+                <label>Image</label>
+                <input 
+                type="text" 
+                name="image"
+                id="image"
+                value={file.image} 
+                onChange={handleFileChange} />
+            </div>
+        )}
 
         <label>Comment</label>
         <input 

@@ -1,39 +1,47 @@
-import "./Navbar.css"
+import "./Navbar.css";
 
 const Navbar = ({ handleNav, user }) => {
-
-    //if a user isnot logged in, show one state of 
-
-    return (
-        <div className="navbar">
-        {/* if a user isnot logged in, show one navbar state as */}
-              {/* Else if user is logged in, render Navbar state as */}
-            
-        {!user ? (
-            <div className="navbarblock">
-                <div className="logsignblock">
-                    <a onClick={() => handleNav('Login')} id="logSign" >Login</a>
-                    <a onClick={() => handleNav('Signup')} id="logSign" >Sign Up</a>
-                </div>
-                <div className="navbar">
-                    <a onClick={() => handleNav('Home')} >Home</a>
-                </div>
-            </div>
-        ) : (
-            <div className="navbarblock">
-                <div className="logsignblock">
-                    <a onClick={() =>  handleNav('Logout')} id="logSign" >Log Out</a>
-                </div>
-                <div className="navbar">
-                    <a onClick={() => handleNav('Home')} >Home</a>
-                    <a onClick={() => handleNav('Profile')} >Profile</a>
-                    <a onClick={() => handleNav('Upload')} >UpLoad</a>
-                </div>
-            </div>
-            )}
+  return (
+    <div className="navbar">
+      {/* If the user is not logged in, show the login/signup state */}
+      {!user ? (
+        <div className="navbarBlock">
+          <div className="logSignBlock">
+            <a onClick={() => handleNav("Login")} className="logSign">
+              Login
+            </a>
+            <a onClick={() => handleNav("Signup")} className="logSign">
+              Sign Up
+            </a>
+          </div>
+          <div className="navbarLinks">
+            <a onClick={() => handleNav("Home")} className="navLink">
+              Home
+            </a>
+          </div>
         </div>
-             
-    )
-}
+      ) : (
+        <div className="navbarBlock">
+          <div className="logSignBlock">
+            <a onClick={() => handleNav("Logout")} className="logSign">
+              Log Out
+            </a>
+          </div>
+          <div className="navbarLinks">
+            <a onClick={() => handleNav("Home")} className="navLink">
+              Home
+            </a>
+            <a onClick={() => handleNav("Profile")} className="navLink">
+              Profile
+            </a>
+            <a onClick={() => handleNav("Upload")} className="navLink">
+              Upload
+            </a>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
-export default Navbar
+export default Navbar;

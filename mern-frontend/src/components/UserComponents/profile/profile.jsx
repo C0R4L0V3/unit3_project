@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-const Profile = ({ user }) => {
+const Profile = ({ user, setPage }) => {
     //defualt to an empty array
     const [userContent, setUserContent] = useState(user.user.content || [])
     const userId = user.user._id
@@ -30,18 +30,19 @@ useEffect(() => {
         try {
             // delete from api
             let res = await fetch(`${import.meta.env.VITE_API_URL}/users/${userId}/content/${contentId}`,
-                {method: 'DELETE',
+                {
+                method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
                 }
             }
         );
         if (res.ok) {
             const result = await res.json();
             console.log(result.message);
-            //update the user state
+            //update the userConent state
             setUserContent((prevContent) => 
-                prevContent.filter((item) => item._id !== contentId))
+                prevContent.filter((post) => post._id !== contentId))
 
             alert('Content Deleted')
         } else {
@@ -67,7 +68,7 @@ useEffect(() => {
                 const isVideo = post.category && post.category.toLowerCase() === 'video'
 
                 return (
-                    <div key={idx}>
+                    <div key={post._id || idx}>
                         <h3>Name: {post.name}</h3>
 
                             {isImage ? (
@@ -90,7 +91,7 @@ useEffect(() => {
 
                             <p>{post.dateUploaded}</p>
                             <div>
-                                <button>Edit</button>
+                                <button type="button" onClick={() => setPage('Update')}>Edit</button>
                                 <button type="button" onClick={() => deleteHandler(post._id)}>Delete</button>
                             </div>
                         </div>

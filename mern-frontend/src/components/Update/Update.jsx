@@ -1,15 +1,19 @@
-import { useState } from 'react'
+import { useState} from 'react'
+import { useParams } from 'react-router-dom';
 import './update.css'
 
-const Update = ({ user, setUser, setPage}) => {
-
+const Update = ({ user, setUser, setPage }) => {
+    
+    const { contentId } = useParams(); // this extracts the id from the URL
+    console.log("is this pulling the correct id?", contentId);
+    
     // const [userConent, setUserContent] = useState(user.user.content || []) 
     const userId = user.user._id
     //made for simplifying
     const content = user.user.content
     
     // need this so i can keep unchanged 
-    const originalContent = userContent.find((post) => post._id === contentId)
+    const originalContent = content.find((post) => String(post._id) === String(contentId))
 
     //set initial form state with exsisting content values
     const [file, setFile] = useState ({
@@ -54,9 +58,15 @@ const Update = ({ user, setUser, setPage}) => {
                 //update the user content with new changes
                 setUser((prevUser) => {
                     //map through  user content array
-                    const updatedContent = prevUser.content.map((post) =>
+                    const updatedContent = prevUser.user.content.map((post) =>
                         //if the contetn id and url id matchs merge into the updated array, else add the unchanged content
-                        post._id === contentId ? {...post, ...updatedContent} : post)
+                        post._id === contentId ? {...post, ...updateContent} : post)
+
+                        //returning the updated user state
+                        return {
+                            ...prevUser,
+                                user: { ...prevUser.user, content: updatedContent}
+                        }
                 })
                 
                 alert('Post Updated')
@@ -68,7 +78,7 @@ const Update = ({ user, setUser, setPage}) => {
             }
             
         } catch (error) {
-            console.error(`Error encountered`, error.mesage);
+            console.error(`Error encountered`, error.message);
             
         }
 
@@ -79,7 +89,7 @@ const Update = ({ user, setUser, setPage}) => {
     return (
         <div>
       <h1>Edit your Content!</h1>
-      <form onSubmit={(e) => updateHandler(e, contentId)}>
+      <form onSubmit={updateHandler}>
         {/* add more possible field to form and model */}
         <label>Title</label>
         <input 

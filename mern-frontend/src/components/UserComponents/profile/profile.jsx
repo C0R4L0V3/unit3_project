@@ -14,7 +14,7 @@ const fetchUserContent = async () => {
         setUserContent(JSONdata.user.content || [])
         
     } catch (error) {
-        console.error('Error fetching user data', error);
+        console.error('Error fetching cd fr user data', error);
         
     }
 }

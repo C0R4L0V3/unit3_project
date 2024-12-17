@@ -117,7 +117,7 @@ const Profile = ({ user, setPage, setContentId }) => {
                             <p>{post.blog}</p>
                             <p>{post.dateUploaded}</p>
                             <div>
-                                <button>Edit</button>
+                            <button type="button" onClick={() => handleUpdateClick(post._id)}>Edit</button>
                                 <button type="button" onClick={() => deleteHandler(post._id)}>Delete</button>
                             </div>
                         </div>

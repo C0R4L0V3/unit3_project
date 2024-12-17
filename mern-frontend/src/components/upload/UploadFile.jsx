@@ -7,12 +7,17 @@ const Upload = ({ user, setUser, setPage }) => {
     category: ''
   });
 
+  const [radio, setRadio] = useState('image'); //State for radio button between video/image
+
 
   const handleFileChange = (e) => {
     setFile({ ...file, [e.target.id]: e.target.value });
   };
 
-  
+  const handleRadioChange = (e) => {
+    setRadio(e.target.value)
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -68,27 +73,95 @@ const Upload = ({ user, setUser, setPage }) => {
       <h1>Upload your content</h1>
       <form onSubmit={handleSubmit}>
         {/* add more possible field to form and model */}
-        <label>Cryptid Name</label>
+        <div>
+        <label>Title: </label>
+        <input 
+        type="text" 
+        name="title"
+        id="title"
+        value={file.title} 
+        onChange={handleFileChange} />
+        </div>
+
+        <div>
+        <label>Cryptid Name: </label>
         <input 
         type="text" 
         name="name"
         id="name"
         value={file.name} 
         onChange={handleFileChange} />
-        <label>Value</label>
-        <input 
+        </div>
+
+        
+        <div>
+        <label>Upload Type: </label>
+          <input
+           type="radio"
+           id="videoType"
+           name="type"
+           value="video"
+           checked={radio === 'video'}
+           onChange={handleRadioChange} />
+        
+        <label htmlFor="videoType">Video</label>
+
+        <input
+           type="radio"
+           id="imageType"
+           name="type"
+           value="image"
+           checked={radio === 'image'}
+           onChange={handleRadioChange} />
+        
+        <label htmlFor="imageType">Image</label> 
+
+        <input
+           type="radio"
+           id="blogType"
+           name="type"
+           value="blog"
+           checked={radio === 'blog'}
+           onChange={handleRadioChange} />
+        
+        <label htmlFor="blogType">Blog</label> 
+        {/* explain above */}
+        </div>
+
+       {/* explain below */}
+        {radio === 'video' && (
+          <div>
+            <label>Video Link: </label>
+            <input  class="video"
+            type="text" 
+            name="video"
+            id="video"
+            value={file.video} 
+            onChange={handleFileChange} />
+          </div>
+        )}
+
+        {radio === 'image' && (
+          <div>
+            <label>Image Link: </label>
+            <input class="image"
+            type="text" 
+            name="image"
+            id="image"
+            value={file.image} 
+            onChange={handleFileChange} />
+          </div>
+        )}
+        <div>
+        <label>Comments: </label>
+        <input
         type="text" 
-        name="value"
-        id="value"
-        value={file.value} 
+        name="blog"
+        id="blog"
+        value={file.blog} 
         onChange={handleFileChange} />
-        <label>Catagory</label>
-        <input 
-        type="text" 
-        name="category"
-        id="category"
-        value={file.category} 
-        onChange={handleFileChange} />
+        </div>
+
         <button type="submit">Upload</button>
       </form>
     </div>

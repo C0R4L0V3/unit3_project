@@ -2,13 +2,14 @@
 //User Model
 const { transform } = require("lodash");
 const mongoose = require("mongoose");
+const { string } = require("yargs");
 
 
 const contentSchema = new mongoose.Schema({
-  name: String,
+  title: String, //title of the content
+  name: String,  //Name of the Cryptid if applicable
   video: String, //essence of the content, video link,
   image: String, //image
-  category: String, //e.g. "Comment", "Image", "Video", for now if the user has a lot of uploads I imagine we will parse they by content-type.
   blog: String, // string of text
   dateUploaded: String, //good chance that MONGODB tracks this metadata on their own.  Added here either way.
   });

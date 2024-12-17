@@ -63,31 +63,32 @@ useEffect(() => {
             {userContent && userContent.length ? ( //Ternary Wrapper in case user has no content *prevents the code from breaking if userContent is undfined
             userContent.map((post, idx) => {//Map through user content
                 //was getting an error on toLowercase doing this for a safety check
-                const isImage = post.category && post.category.toLowerCase() === 'image';
-                const isVideo = post.category && post.category.toLowerCase() === 'video'
+                // const isImage = post.category && post.category.toLowerCase() === 'image';
+                // const isVideo = post.category && post.category.toLowerCase() === 'video'
 
                 return (
                     <div key={idx}>
+                        <h2>Title: {post.title}</h2>
                         <h3>Name: {post.name}</h3>
-
-                            {isImage ? (
-                                <img src={post.value} alt={post.name} />
-                            ) : isVideo ? (
+                        
+                        
+                            {post.image!=='' && (<img src={post.image} alt={post.name}/>) }
+                            {/*This is a short-circuit evaluation*/}  
+                            {/* Test above by creating item with video and no img */}
+                            {post.video && (
                                 // must use the YouTube embed URL, which is designed for iframes
                                 <iframe
                                     width="560"
                                     height="315"
-                                    src={post.value}
+                                    src={post.video}
                                     title="YouTube video player"
                                     frameBorder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     referrerPolicy="strict-origin-when-cross-origin"
                                     allowFullScreen
                                 ></iframe>
-                            ) : (
-                                <p>{post.value}</p> //fallback value if something isnt a video or image
                             )}
-
+                            <p>{post.blog}</p>
                             <p>{post.dateUploaded}</p>
                             <div>
                                 <button>Edit</button>

@@ -28,8 +28,20 @@ const Home = ({content, setContent}) => {
                 {content.length ? ( //Ternary Wrapper in case we have no content on the home page.
                 content.map((post, index) => (//Map through fetchContent()
                      <li className = "postContainer" key={index}> {/* display posts. */}
-                        <h3>Name: {post.name}</h3>
-                        <img src={post.value}/>
+                     <h2>Title: {post.title}</h2>
+                        <h3>Cryptid Name: {post.name}</h3>
+                        {post.image!=='' && (<img src={post.image}/>)}
+                        {post.video && (<iframe
+                                    width="560"
+                                    height="315"
+                                    src={post.video}
+                                    title="YouTube video player"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerPolicy="strict-origin-when-cross-origin"
+                                    allowFullScreen
+                                ></iframe>)}
+                        <p>{post.blog}</p>       
                         <p>{post.dateUploaded}</p>
 
                     </li>

@@ -1,14 +1,15 @@
 const { json } = require("express");
 const User = require("../models/user");
 const { all } = require("../routes/userRoutes");
+
 //adding content
 const addUserContent = async (req, res) => {
   const { userId } = req.params;
-  const { name, value, category } = req.body;
+  const { title, name, video, image, blog } = req.body;
   try {
     const user = await User.findById(userId);
     if (!user) return res.json({ message: "User not found" });
-    const newContent = { name, value, category, dateUploaded: new Date() };
+    const newContent = { title, name, video, image, blog, dateUploaded: new Date() };
     user.content.push(newContent);
     await user.save(); //Needed to save the User object in the model to reflect changes to the embedded array
     res.json({ message: "content created", newContent });

@@ -1,0 +1,85 @@
+form {
+  background: linear-gradient(145deg, #14151e, #0b0c12);
+  border: 1px solid #23242d;
+  color: #d6dcdb;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(123, 209, 255, 0.2);
+  max-width: 400px;
+  margin: 4rem auto;
+  text-align: left;
+}
+
+form h2 {
+  color: #7bd1ff;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 8px rgba(123, 209, 255, 0.7);
+  font-size: 2rem;
+}
+
+form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #9facaa;
+}
+
+form input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #3b4543;
+  border-radius: 4px;
+  background-color: #1b1d2b;
+  color: #d6dcdb;
+  font-size: 1rem;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+form input:focus {
+  outline: none;
+  border-color: #7bd1ff;
+  box-shadow: 0px 0px 8px rgba(123, 209, 255, 0.5); /* Mystic glow */
+}
+
+form button {
+  background-color: #941111;
+  color: #fbfbfb;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  font-size: 1rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+form button:hover {
+  background-color: #750c0c;
+  box-shadow: 0 0 12px rgba(148, 17, 17, 0.8);
+  transform: scale(1.05);
+}
+
+form button:active {
+  transform: scale(0.95);
+}
+
+form p {
+  margin-bottom: 1.2rem;
+}
+
+.error-message {
+  color: #ff6b6b;
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: bold;
+  text-shadow: 0px 0px 4px rgba(255, 107, 107, 0.7);
+}
+
+.glow-text {
+  color: #7bd1ff;
+  text-shadow: 0 0 8px rgba(123, 209, 255, 0.5);
+}

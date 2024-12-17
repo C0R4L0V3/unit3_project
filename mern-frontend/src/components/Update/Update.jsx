@@ -1,11 +1,11 @@
 import { useState} from 'react'
-import { useParams } from 'react-router-dom';
+
 import './update.css'
 
-const Update = ({ user, setUser, setPage }) => {
+const Update = ({ user, setUser, setPage, contentId }) => {
     
-    const { contentId } = useParams(); // this extracts the id from the URL
-    console.log("is this pulling the correct id?", contentId);
+    // const { contentId } = useParams(); // this extracts the id from the URL
+    // console.log("is this pulling the correct id?", contentId);
     
     // const [userConent, setUserContent] = useState(user.user.content || []) 
     const userId = user.user._id
@@ -30,7 +30,7 @@ const Update = ({ user, setUser, setPage }) => {
         
     }
 
-    const updateHandler = async (e, contentId) => {
+    const updateHandler = async (e) => {
         e.preventDefault(); //prevent form submission reload
         console.log(`trying to update post ${contentId}`);
         
@@ -39,6 +39,9 @@ const Update = ({ user, setUser, setPage }) => {
             const updateContent = {};
              for (const key in file) {
                 if (file[key] !== originalContent[key]) {
+                    console.log('Original key', originalContent[key])
+                    console.log('file key', file[key] );
+                    
                     updateContent[key] = file[key]
                 }
              }
@@ -54,7 +57,7 @@ const Update = ({ user, setUser, setPage }) => {
             );
             if(res.ok) {
                 const result = await res.json();
-                console.log(result.mesage);
+                console.log(result);
                 //update the user content with new changes
                 setUser((prevUser) => {
                     //map through  user content array

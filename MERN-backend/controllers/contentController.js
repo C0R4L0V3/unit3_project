@@ -53,16 +53,19 @@ const getUserContent = async (req, res) => {
 //update user content
 const updateUserContent = async (req, res) => {
   const { userId, contentId } = req.params;
-  const { name, value, category } = req.body;
+  const { title, name, video, image, blog } = req.body;
 
   try {
     const user = await User.findById(userId);
     if (!user) return res.json({ message: "user not found" });
     const content = user.content.id(contentId); //find the subdocument by its id
     if (!content) return res.json({ message: "content not found" });
+    if (title) content.title = title;
     if (name) content.name = name;
-    if (value) content.value = value;
-    if (category) content.category = category;
+    if (video) content.video = video;
+    if (image) content.image = image;
+    if (blog) content.blog = blog;
+
     await user.save(); //We don't have here to return new true because we are awaiting the save.
     res.json(user.content);
   } catch (error) {

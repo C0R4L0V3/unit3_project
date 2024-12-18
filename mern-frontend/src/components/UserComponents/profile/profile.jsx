@@ -83,8 +83,8 @@ const Profile = ({ user, setPage, setContentId }) => {
 
     return (
         <>
-        <h1>User Page!</h1>
-        <div className="ContentContainer">
+        <h1>Profile</h1>
+        <div className="profileContentContainer">
             
             {userContent && userContent.length ? ( //Ternary Wrapper in case user has no content *prevents the code from breaking if userContent is undfined
             userContent.map((post, idx) => {//Map through user content
@@ -93,8 +93,8 @@ const Profile = ({ user, setPage, setContentId }) => {
                 // const isVideo = post.category && post.category.toLowerCase() === 'video'
 
                 return (
-                    <div key={idx}>
-                        <h2>Title: {post.title}</h2>
+                    <div className="postContainer" key={idx}>
+                        <h2>{post.title}</h2>
                         <h3>Name: {post.name}</h3>
                         
                         
@@ -116,9 +116,9 @@ const Profile = ({ user, setPage, setContentId }) => {
                             )}
                             <p>{post.blog}</p>
                             <p>{post.dateUploaded}</p>
-                            <div>
-                            <button type="button" onClick={() => handleUpdateClick(post._id)}>Edit</button>
-                                <button type="button" onClick={() => deleteHandler(post._id)}>Delete</button>
+                            <div className="buttonContainer">
+                            <button className="primary2" type="button" onClick={() => handleUpdateClick(post._id)}>Edit</button>
+                                <button className="caution" type="button" onClick={() => deleteHandler(post._id)}>Delete</button>
                             </div>
                         </div>
                     );

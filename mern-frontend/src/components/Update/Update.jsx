@@ -1,6 +1,6 @@
 import { useState} from 'react'
 
-import './update.css'
+import './Update.css'
 
 const Update = ({ user, setUser, setPage, contentId }) => {
     

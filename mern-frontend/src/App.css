@@ -3,7 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-color: ;
+
 }
 
 .light {
@@ -30,17 +30,20 @@ color: #5e6e6b; /*lighter text color for an area where we want to show contrast*
 
 .caution{ /*intended to draw attention and convey caution, something like a delete button*/
   background-color: #941111;
-  color:#fbfbfb
+  color:#fbfbfb;
+  border: 3px solid #fbfbfb;
 }
 
 .primary1{ /*our primary theme, can be used for the header, call to action labels/buttons such as upload content or create account/sign up*/
    background-color: #0c6656;
    color: #fbfbfb;
+   border: 3px solid #fbfbfb;
 }
 
 .primary2{ 
   background-color: #fbfbfb;
   color: #0c6656;
+  border: 3px solid #0c6656;
 }
 
 
@@ -53,4 +56,61 @@ color: #5e6e6b; /*lighter text color for an area where we want to show contrast*
   me think it's better to just set it to white.  Can change later.*/
   background-color: #fbfbfb;
   color: #280c66;
+}
+
+.profileContentContainer {
+  max-width: 1000px; 
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(145deg, #1f2026, #0e0f14);
+  border: 1px solid #2a2d38;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(163, 161, 255, 0.2);
+} 
+ 
+
+.postContainer {
+  background: linear-gradient(145deg, #2b2e39, #161a20);
+  border: 1px solid #3a434f;
+  border-radius: 8px;
+  margin: 1rem 0;
+  padding: 1.5rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5), 0 0 15px rgba(163, 161, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.postContainer:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(163, 161, 255, 0.6);
+}
+
+.postContainer img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+  border: 1px solid #2a2d38;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(163, 161, 255, 0.4);
+}
+
+.postContainer h2 {
+  color: #14d4b1;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 8px rgba(163, 161, 255, 0.6);
+}
+
+.postContainer h3 {
+  color: #a3a1ff;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 8px rgba(163, 161, 255, 0.6);
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  /* width: 10%; */
+  align-items: center;
 }

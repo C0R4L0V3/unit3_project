@@ -22,14 +22,14 @@ const Home = ({content, setContent}) => {
 
     return (
         <>
-            <h1>Home Page!</h1>
+            <h1>Encyclopedia Chupacabra</h1>
             <div className="contentContainer">
                 
                 <ul>
                 {content.length ? ( //Ternary Wrapper in case we have no content on the home page.
                 content.map((post, index) => (//Map through fetchContent()
                      <li className = "postContainer" key={index}> {/* display posts. */}
-                     <h2>Title: {post.title}</h2>
+                     <h2>{post.title}</h2>
                         <h3>Cryptid Name: {post.name}</h3>
                         {post.image!=='' && (<img src={post.image}/>)}
                         {post.video && (<iframe
